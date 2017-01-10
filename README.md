@@ -22,7 +22,7 @@ The primary difference between HDInsight and HDP resides in the way they store d
 ## Comparison
 ### Summary of Differences
  | HDInsight | HDP
---- | --- | ---
+:---: | :---: | :---:
 **Setup** | Simple-- no download required | Complex-- download required
 **Operating Systems** | Any | Linux
 **Data Storage** | Cloud | On-premises
@@ -30,20 +30,24 @@ The primary difference between HDInsight and HDP resides in the way they store d
 **File Storage** | Azure Storage Blobs | HDP File Store
 
 ###Advantages of HDInsight:
-* Its cloud storage capabilities. The cost of entry to initialize large node clusters is significantly smaller if using cloud services. Building large node clusters with HDP would require a substantial amount of data center space, and thus raises the starting cost of building clusters. 
-* More cost efficient than HDP's on-premises data service, since clusters can be deleted and usage is billed per hour.
-* Automatic provisioning of clusters allows HDInsight clusters to be more easily created.
-* Easy and quick to set up, only requires Azure subscription so it runs on any operating system. Since there is no need to download the service, system memory is not an issue. On HDP, the user would need access to a Virtual Machine if their native OS is not Linux, which is occassionally unreliable. HDP has a higher entry barrier since it is very technical to set up and is time consuming to do so. Since HDP is run locally, it subsumes a significant amount of system memory. 
-* Access to Azure Blob storage and other Azure services.
-* Offers cluster scaling which allows the user to change the number of nodes in a cluster without deleting it.
-* Much more throrough documentation and tutorials than with HDP, so it is more useful for beginniners and industry professionals alike.
-* Azure platform offers support hybrid scenarios through its HDP foundation and Analytics Platform System to link data from the cloud to on-premises, or moving on-premises data to the cloud. 
+* Its **cloud storage capabilities**. The cost of entry to initialize large node clusters is significantly smaller if using cloud services. 
+  * Building large node clusters with HDP would require a substantial amount of data center space, and thus raises the starting cost of building clusters. 
+* **More cost efficient for smaller projects** than HDP's on-premises data service, since clusters can be deleted and usage is billed per hour.
+* **Automatic provisioning of clusters** allows HDInsight clusters to be more easily created.
+* Easy and **quick to set up**, only requires Azure subscription so it runs on any operating system. Since there is no need to download the service, **system memory is not an issue**. 
+  * On HDP, the user would need access to a Virtual Machine if their native OS is not Linux, which is occassionally unreliable. **HDP has a higher entry barrier** since it is very technical to set up and is time consuming to do so. Since HDP is run locally, it subsumes a significant amount of system memory. 
+* Access to **Azure Blob storage** and other Azure services.
+* **Offers cluster scaling** which allows the user to change the number of nodes in a cluster without deleting it.
+* Much more **throrough documentation and tutorials** than with HDP, so it is more useful for beginniners and industry professionals alike.
+* Azure platform offers **support for hybrid scenarios** through its HDP foundation and Analytics Platform System to link data from the cloud to on-premises, or moving on-premises data to the cloud. 
 
 ###Advantages of HDP:
-* 
-
-
-
+* Its *on-premises data storage capabilities**. 
+  * Offers **better security** for sensitive data than public cloud services. Users of HDP own the data they use in their local file system or data centers.
+  * Cloud services make it difficult to pinpoint where data is located, and on-premises storage allows for **data visibility**
+  * Using private data centers **overcomes latency issues** with cloud services
+* **More cost efficient for bigger, long-term projects**, since data center space that is built would accommodate clusters for cheaper over a long period of time
+* Access to **HDP File Store**
 
 ## Installation + code for HdInisght
 
