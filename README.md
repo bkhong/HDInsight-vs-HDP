@@ -20,12 +20,13 @@
 The primary difference between HDInsight and HDP resides in the way they store data. An organization with an **on-premises** data service stores data internally onsite. A **cloud** data service stores its data externally on public data servers. HDP is an on-premises service, while HDInsight is a cloud service.
 
 ### Summary of Differences
-| HDInsight | HDP
+ | HDInsight | HDP
 --- | --- | ---
 Setup | Simple-- no download required | Complex-- download required
 Operating Systems | Any | Linux
 Data Storage | Cloud | On-premises
 File Storage | Azure Storage Blobs | HDP File Store
+Entry Cost for Large Clusters | Lower | Higher
 
 ### Extended Comparison
 
