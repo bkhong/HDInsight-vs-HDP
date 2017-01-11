@@ -59,8 +59,9 @@ The primary difference between HDInsight and HDP resides in the way they store d
 4. Click on the **example** directory, then click on the **data** directory. You should see a list of datasets with a variety of file types.
 ![exampleblob](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/example_folder.png)
 ![datablob](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/data_folder.png)
-5. Click on **Upload** and select the data file from your local drive. Click **Upload** at the bottom of the window to upload the file. Verify that **Mass-Shooting-Data.txt** is in the **data** folder, then return to the Azure portal dashboard.
+5. Click on **Upload** and select the data file from your local drive. Click **Upload** at the bottom of the window to upload the file. 
 ![upload](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/upload.png)
+6. Verify that **Mass-Shooting-Data.txt** is in the **data** folder, then return to the Azure portal dashboard.
 ![datafolderwithdataset](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/data_folder_with_dataset.png)
 6. Create a HDInsight cluster from the Azure portal. Microsoft documentation has a [guide](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-linux-tutorial-get-started) that goes over cluster configuration. Pin the cluster to the dashboard for ease of access.
 7. Click on the cluster from the dashboard, and select **Cluster Dashboard** from the **Quick links** section, then click **HDInsight Cluster Dashboard** to view the cluster through Ambari. Alternatively, the link **https://[ClusterName].azurehdinsight.net** will open Ambari, where [ClusterName] is the name of your cluster.
@@ -69,6 +70,33 @@ The primary difference between HDInsight and HDP resides in the way they store d
 9. Select **Hive View** from the header at the top of the page.
 ![hiveview](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/hive_view.png)
 10. Paste the following HiveQL statements in the **Query Editor** section.
+
+```sql
+set hive.execution.engine=tez;
+DROP TABLE shootingdata;
+CREATE EXTERNAL TABLE shootingdata (day string,
+city string,
+state string,
+injured int,
+killed int,
+lat double,
+lng double)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
+SELECT * FROM shootingdata;
+```
+
+The keywords perform the following:
+* **set hive.execution.engine=tez**: Sets the execution engine to use Tez, which increases query performance.
+* **DROP TABLE**: To prevent table conflicts if queried multiple times, this deletes the table and data file if the table already exists.
+* **CREATE EXTERNAL TABLE**: Creates a new external table that stores the columns and column names.
+* **ROW FORMAT**: Communicates to Hive about how the data is formatted and what the delimiters are.
+* **STORED AS TEXTFILE LOCATION**: Communicates to Hive where the text file is stored. The **wasbs:///** prefix is a relative path used when the file is in the default storage container for the cluster you are using.
+* **SELECT**: Selects all of the columns from the table.
+11. Click **Execute**, and the **Query Process Results** section below the **Query Editor** will display the table after the query has finished processing. The data will look like this (some of the columns will not appear in this screenshot due to the insufficient browser width):
+![selectall](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/select_all.png)
+12. Another example of a more specific query is provided below. This query requests for the day, city, and state of all mass shootings with 10 or more casualties. Delete the previous statements from the **Query Editor** and paste the following statements. 
+
 ```sql
 set hive.execution.engine=tez;
 DROP TABLE shootingdata;
@@ -82,10 +110,12 @@ lng double)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
 SELECT day, city, state FROM shootingdata 
-WHERE INPUT__FILE__NAME LIKE '%Mass-Shooting-Data.txt'
+WHERE INPUT__FILE__NAME LIKE '%Mass-Shooting-Data.txt' 
 AND shootingdata.injured + shootingdata.killed >= 10;
 ```
 
-## Same with Hortonworks
+13. Click **Execute**, and the **Query Process Results** section will display the following table.
+![select10ormore](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/select_10_or_more.png)
 
+## Hortonworks Note
 
