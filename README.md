@@ -76,22 +76,22 @@ The primary difference between HDInsight and HDP resides in the way they store d
 ![hiveview](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/hive_view.png)
 11. Paste the following HiveQL statements in the **Query Editor** section.
 
-        ```sql
-        set hive.execution.engine=tez;
-        DROP TABLE shootingdata;
-        CREATE EXTERNAL TABLE shootingdata (day string,
-        city string,
-        state string,
-        injured int,
-        killed int,
-        lat double,
-        lng double)
-        ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-        STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
-        SELECT * FROM shootingdata;
-        ```
+    ```sql
+    set hive.execution.engine=tez;
+    DROP TABLE shootingdata;
+    CREATE EXTERNAL TABLE shootingdata (day string,
+    city string,
+    state string,
+    injured int,
+    killed int,
+    lat double,
+    lng double)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
+    SELECT * FROM shootingdata;
+    ```
 
-The keywords perform the following:
+ The keywords perform the following:
   * **set hive.execution.engine=tez**: Sets the execution engine to use Tez, which increases query performance.
   * **DROP TABLE**: Prevents table conflicts if queried multiple times, this deletes the table and data file if the table already exists.
   * **CREATE EXTERNAL TABLE**: Creates a new external table that stores the columns and column names.
