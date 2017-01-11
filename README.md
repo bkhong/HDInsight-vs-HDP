@@ -1,8 +1,14 @@
 # Azure HDInsight and Hortonworks Data Platform Comparison with Hive and HiveQL Tutorial
-<Add description>
+
+This is a comparison guide on the high-level differences between HDInsight and HDP as Hadoop services. There is a tutorial provided on the latter half of the guide on how to use Hive and HiveQL to analyze data from a text file using HDInsight and HDP for the purposes of briefly introducing a way to use these systems and to provide resources to get started.
 
 ## Table of contents
-
+* [Requirements](https://github.com/bkhong/HDInsight-vs-HDP#requirements)
+* [Introduction](https://github.com/bkhong/HDInsight-vs-HDP#introduction)
+* [Comparison](https://github.com/bkhong/HDInsight-vs-HDP#comparison)
+* [HDInsight Hive and HiveQL Tutorial](https://github.com/bkhong/HDInsight-vs-HDP#hdinsight-hive-and-hiveql-tutorial)
+* [HDP Hive and HiveQL](https://github.com/bkhong/HDInsight-vs-HDP#hdp-hive-and-hiveql)
+   
 ## Requirements
   * Azure subscription or [30 day free trial account](https://azure.microsoft.com/en-us/free/)
   * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
@@ -50,9 +56,8 @@ The primary difference between HDInsight and HDP resides in the way they store d
 * Access to **HDP File Store**
 
 ## HDInsight Hive and HiveQL Tutorial
-
 1. We will be using [this](/.data/Mass-Shooting-Data.txt) public mass shooting dataset. Download the file to your local drive.
-2. Create an Azure storage account and pin the account to the dashboard. There is a GitHub [guide](https://github.com/Microsoft/azure-docs/blob/master/articles/storage/storage-create-storage-account.md) that reviews this process.
+2. Create an Azure storage account and pin the account to the dashboard. Here is a [guide](https://github.com/Microsoft/azure-docs/blob/master/articles/storage/storage-create-storage-account.md) that reviews this process.
 ![pintodashboard](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/pin_to_dashboard.png)
 3. Click on the storage account from the dashboard to open it. Click on **Blobs**, then select the name of your storage account. You should see a list of default directories.
 ![blobs](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/blobs.png)
@@ -87,12 +92,12 @@ SELECT * FROM shootingdata;
 ```
 
 The keywords perform the following:
-* **set hive.execution.engine=tez**: Sets the execution engine to use Tez, which increases query performance.
-* **DROP TABLE**: To prevent table conflicts if queried multiple times, this deletes the table and data file if the table already exists.
-* **CREATE EXTERNAL TABLE**: Creates a new external table that stores the columns and column names.
-* **ROW FORMAT**: Communicates to Hive about how the data is formatted and what the delimiters are.
-* **STORED AS TEXTFILE LOCATION**: Communicates to Hive where the text file is stored. The **wasbs:///** prefix is a relative path used when the file is in the default storage container for the cluster you are using.
-* **SELECT**: Selects all of the columns from the table.
+  * **set hive.execution.engine=tez**: Sets the execution engine to use Tez, which increases query performance.
+  * **DROP TABLE**: To prevent table conflicts if queried multiple times, this deletes the table and data file if the table already exists.
+  * **CREATE EXTERNAL TABLE**: Creates a new external table that stores the columns and column names.
+  * **ROW FORMAT**: Communicates to Hive about how the data is formatted and what the delimiters are.
+  * **STORED AS TEXTFILE LOCATION**: Communicates to Hive where the text file is stored. The **wasbs:///** prefix is a relative path used when the file is in the default storage container for the cluster you are using.
+  * **SELECT**: Selects all of the columns from the table.
 12. Click **Execute**, and the **Query Process Results** section below the **Query Editor** will display the table after the query has finished processing. The data will look like this (some of the columns will not appear in this screenshot due to the insufficient browser width):
 ![selectall](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/select_all.png)
 13. Another example of a more specific query is provided below. This query requests for the day, city, and state of all mass shootings with 10 or more casualties. Delete the previous statements from the **Query Editor** and paste the following statements. 
@@ -117,5 +122,5 @@ AND shootingdata.injured + shootingdata.killed >= 10;
 14. Click **Execute**, and the **Query Process Results** section will display the following table.
 ![select10ormore](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/select_10_or_more.png)
 
-## Hortonworks Note
-
+## HDP Hive and HiveQL
+To repeat the HDInsight HiveQL tutorial above on HDP, you will need to have HDP installed first. Follow this [guide](http://docs.hortonworks.com/HDPDocuments/Ambari-2.4.2.0/bk_ambari-installation/content/ch_Getting_Ready.html) for instructions on how to set up the Ambari server on your OS and how to create clusters on Ambari. If you have a non-Linux machine, you will need to download VirtualBox to use HDP. The process of querying data using Hive is identical to doing it on HDInsight since they both use the Ambari UI. The differences in using HDP instead of HDInsight are mainly in the way that the clusters are created on Ambari instead of on HDInsight's Azure interface, and files are uploaded to the HDP File Store instead of Azure Blob Storage.
