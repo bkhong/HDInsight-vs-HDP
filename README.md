@@ -63,13 +63,13 @@ The primary difference between HDInsight and HDP resides in the way they store d
 ![upload](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/upload.png)
 6. Verify that **Mass-Shooting-Data.txt** is in the **data** folder, then return to the Azure portal dashboard.
 ![datafolderwithdataset](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/data_folder_with_dataset.png)
-6. Create a HDInsight cluster from the Azure portal. Microsoft documentation has a [guide](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-linux-tutorial-get-started) that goes over cluster configuration. Pin the cluster to the dashboard for ease of access.
-7. Click on the cluster from the dashboard, and select **Cluster Dashboard** from the **Quick links** section, then click **HDInsight Cluster Dashboard** to view the cluster through Ambari. Alternatively, the link **https://[ClusterName].azurehdinsight.net** will open Ambari, where [ClusterName] is the name of your cluster.
+7. Create a HDInsight cluster from the Azure portal. Microsoft documentation has a [guide](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-linux-tutorial-get-started) that goes over cluster configuration. Pin the cluster to the dashboard for ease of access.
+8. Click on the cluster from the dashboard, and select **Cluster Dashboard** from the **Quick links** section, then click **HDInsight Cluster Dashboard** to view the cluster through Ambari. Alternatively, the link **https://[ClusterName].azurehdinsight.net** will open Ambari, where [ClusterName] is the name of your cluster.
 ![clusterdashboard](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/cluster_dashboard.png)
-8. Enter the cluster credentials specified when you first created the cluter (*not* the SSH credentials) with the default username **admin**.
-9. Select **Hive View** from the header at the top of the page.
+9. Enter the cluster credentials specified when you first created the cluter (*not* the SSH credentials) with the default username **admin**.
+10. Select **Hive View** from the header at the top of the page.
 ![hiveview](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/hive_view.png)
-10. Paste the following HiveQL statements in the **Query Editor** section.
+11. Paste the following HiveQL statements in the **Query Editor** section.
 
 ```sql
 set hive.execution.engine=tez;
@@ -93,9 +93,9 @@ The keywords perform the following:
 * **ROW FORMAT**: Communicates to Hive about how the data is formatted and what the delimiters are.
 * **STORED AS TEXTFILE LOCATION**: Communicates to Hive where the text file is stored. The **wasbs:///** prefix is a relative path used when the file is in the default storage container for the cluster you are using.
 * **SELECT**: Selects all of the columns from the table.
-11. Click **Execute**, and the **Query Process Results** section below the **Query Editor** will display the table after the query has finished processing. The data will look like this (some of the columns will not appear in this screenshot due to the insufficient browser width):
+12. Click **Execute**, and the **Query Process Results** section below the **Query Editor** will display the table after the query has finished processing. The data will look like this (some of the columns will not appear in this screenshot due to the insufficient browser width):
 ![selectall](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/select_all.png)
-12. Another example of a more specific query is provided below. This query requests for the day, city, and state of all mass shootings with 10 or more casualties. Delete the previous statements from the **Query Editor** and paste the following statements. 
+13. Another example of a more specific query is provided below. This query requests for the day, city, and state of all mass shootings with 10 or more casualties. Delete the previous statements from the **Query Editor** and paste the following statements. 
 
 ```sql
 set hive.execution.engine=tez;
@@ -114,7 +114,7 @@ WHERE INPUT__FILE__NAME LIKE '%Mass-Shooting-Data.txt'
 AND shootingdata.injured + shootingdata.killed >= 10;
 ```
 
-13. Click **Execute**, and the **Query Process Results** section will display the following table.
+14. Click **Execute**, and the **Query Process Results** section will display the following table.
 ![select10ormore](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/select_10_or_more.png)
 
 ## Hortonworks Note
