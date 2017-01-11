@@ -1,4 +1,4 @@
-# Azure HDInsight and Hortonworks Data Platform Comparison with Hive and HiveQL Tutorial
+# Azure HDInsight and Hortonworks Data Platform Comparison with Hive/HiveQL Tutorial
 
 This is a comparison guide on the high-level differences between HDInsight and HDP as Hadoop services. There is a tutorial provided on the latter half of the guide on how to use Hive and HiveQL to analyze data from a text file using HDInsight and HDP. This is for the purposes of briefly introducing a way to use these systems and to provide resources to get started.
 
