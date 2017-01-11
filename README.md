@@ -102,22 +102,22 @@ The primary difference between HDInsight and HDP resides in the way they store d
 ![selectall](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/select_all.png)
 13. An example of a more specific query is provided below. This query requests for the day, city, and state of all the mass shootings with 10 or more casualties. Delete the previous statements from the **Query Editor** and paste the following statements. 
 
-```sql
-set hive.execution.engine=tez;
-DROP TABLE shootingdata;
-CREATE EXTERNAL TABLE shootingdata (day string,
-city string,
-state string,
-injured int,
-killed int,
-lat double,
-lng double)
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
-SELECT day, city, state FROM shootingdata 
-WHERE INPUT__FILE__NAME LIKE '%Mass-Shooting-Data.txt' 
-AND shootingdata.injured + shootingdata.killed >= 10;
-```
+    ```sql
+    set hive.execution.engine=tez;
+    DROP TABLE shootingdata;
+    CREATE EXTERNAL TABLE shootingdata (day string,
+    city string,
+    state string,
+    injured int,
+    killed int,
+    lat double,
+    lng double)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
+    SELECT day, city, state FROM shootingdata 
+    WHERE INPUT__FILE__NAME LIKE '%Mass-Shooting-Data.txt' 
+    AND shootingdata.injured + shootingdata.killed >= 10;
+    ```
 
 14. Click **Execute**, and the **Query Process Results** section will display the following table.
 ![select10ormore](https://github.com/bkhong/HDInsight-vs-HDP/blob/master/media/select_10_or_more.png)
