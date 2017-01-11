@@ -52,24 +52,25 @@ The primary difference between HDInsight and HDP resides in the way they store d
 ## HDInsight Hive and HiveQL Tutorial
 
 1. We will be using [this](/.data/Mass-Shooting-Data.txt) public mass shooting dataset. Download the file to your local drive.
-2. Create an Azure storage account and pin the account to the dashboard. There is a GitHub [guide that reviews this process](https://github.com/Microsoft/azure-docs/blob/master/articles/storage/storage-create-storage-account.md).
-![pintodashboard](./media/pin_to_dashboard)
+2. Create an Azure storage account and pin the account to the dashboard. There is a GitHub [guide](https://github.com/Microsoft/azure-docs/blob/master/articles/storage/storage-create-storage-account.md) that reviews this process.
+![pintodashboard](media/pin_to_dashboard)
 3. Click on the storage account from the dashboard to open it. Click on **Blobs**, then select the name of your storage account. You should see a list of default directories.
-![blobs](./media/blobs)
+![blobs](media/blobs)
 4. Click on the **example** directory, then click on the **data** directory. You should see a list of datasets with a variety of file types.
-![exampleblob](./media/example_folder)
-![datablob](./media/data_folder)
+![exampleblob](media/example_folder)
+![datablob](media/data_folder)
 5. Click on **Upload** and select the data file from your local drive. Click **Upload** at the bottom of the window to upload the file. Verify that **Mass-Shooting-Data.txt** is in the **data** folder, then return to the Azure portal dashboard.
-![upload](./media/upload)
-![datafolderwithdataset](./media/data_folder_with_dataset)
-6. Create a HDInsight cluster from the Azure portal. Microsoft documentation has a [guide that goes over cluster configuration](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-linux-tutorial-get-started). Pin the cluster to the dashboard for ease of access.
+![upload](media/upload)
+![datafolderwithdataset](media/data_folder_with_dataset)
+6. Create a HDInsight cluster from the Azure portal. Microsoft documentation has a [guide](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-linux-tutorial-get-started) that goes over cluster configuration. Pin the cluster to the dashboard for ease of access.
 7. Click on the cluster from the dashboard, and select **Cluster Dashboard** from the **Quick links** section, then click **HDInsight Cluster Dashboard** to view the cluster through Ambari. Alternatively, the link **https://<ClusterName>.azurehdinsight.net** will open Ambari, where <ClusterName> is the name of your cluster.
-![clusterdashboard](./media/cluster_dashboard)
+![clusterdashboard](media/cluster_dashboard)
 8. Enter the cluster credentials specified when you first created the cluter (*not* the SSH credentials) with the default username **admin**.
 9. Select **Hive View** from the header at the top of the page.
-![hiveview](./media/hive_view)
+![hiveview](media/hive_view)
 10. Paste the following HiveQL statements in the **Query Editor** section.
-`set hive.execution.engine=tez;
+```sql
+set hive.execution.engine=tez;
 DROP TABLE shootingdata;
 CREATE EXTERNAL TABLE shootingdata (day string,
 city string,
@@ -82,7 +83,8 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
 SELECT day, city, state FROM shootingdata 
 WHERE INPUT__FILE__NAME LIKE '%Mass-Shooting-Data.txt'
-AND shootingdata.injured + shootingdata.killed >= 10;`
+AND shootingdata.injured + shootingdata.killed >= 10;
+```
 
 ## Same with Hortonworks
 
